@@ -1,0 +1,7 @@
+src/
+pkg/
+grub/grub/
+grub/gnulib/
+grub-btrfs-*.tar.gz
+ap6275p-firmware/firmware
+linux-fydetab/linux-fydetab
