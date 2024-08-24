@@ -9,12 +9,12 @@ pkgver=6.1.75
 pkgrel=1
 arch=('aarch64')
 license=('GPL2')
-url=""
+url="https://github.com/Linux-for-Fydetab-Duo/linux-rockchip"
 pkgdesc="The Linux Kernel and modules"
 optdepends=('mali-G610-firmware-rkr4: Mali G610 firmware for Rockchip RK3588')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git' 'uboot-tools' 'vboot-utils' 'dtc')
 options=('!strip' 'ccache')
-source=(git+git@gitlab.fydeos.xyz:fydetab-linux/linux.git#branch=noble-panthor
+source=(git+https://github.com/Linux-for-Fydetab-Duo/linux-rockchip.git#branch=noble-panthor
         'linux.preset'
         'config')
 md5sums=('SKIP'
