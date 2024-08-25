@@ -2,6 +2,7 @@ post_install() {
     systemctl enable --now fydetabduo.service
     systemctl enable --now bluetooth-fydetab.service
     systemctl enable --now touchegg.service
+    cp /usr/share/sddm/scripts/Xsetup-new /usr/share/sddm/scripts/Xsetup
 }
 post_upgrade() {
     post_install
@@ -9,6 +10,8 @@ post_upgrade() {
     systemctl enable bluetooth-fydetab.service
     systemctl enable bluetooth
     systemctl enable touchegg.service
+    echo "Installed new sddm configuration. Please check /etc/sddm.conf.d/fydetab.conf.pacnew for changes."
+    echo "Please copy the new configuration manually."
 }
 post_remove() {
     systemctl disable --now fydetabduo.service

@@ -21,13 +21,13 @@ md5sums=('SKIP'
          'SKIP'
          'SKIP')
 prepare() {
-  cd linux
+  cd linux-rockchip
 
   cp ${srcdir}/config .config
 }
 
 build() {
-  cd linux
+  cd linux-rockchip
 
   echo > .scmversion
   echo > localversion
@@ -49,7 +49,7 @@ _package() {
   provides=("linux-fydetab=${pkgver}" "linux")
   backup=("etc/mkinitcpio.d/${_kernel}.preset")
 
-  cd linux
+  cd linux-rockchip
 
   local _version="$(<version)"
 
@@ -82,7 +82,7 @@ _package-headers() {
   pkgdesc="The Linux Kernel and modules - Headers"
   provides=("linux-headers=${pkgver}")
 
-  cd linux
+  cd linux-rockchip
   local _version="$(<version)"
   local builddir="$pkgdir/usr/lib/modules/$_version/build"
 

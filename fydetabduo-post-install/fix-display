@@ -1,0 +1,11 @@
+#! /bin/bash
+# Fix display orientation and touchscreen input
+set +e
+
+# Rotate display
+xrandr --output DSI-1 --auto --rotate right
+
+# Rotate touchscreen input
+xinput set-prop 'pointer:himax-touchscreen' 'Coordinate Transformation Matrix' 0 1 0 -1 0 1 0 0 1 
+
+exit 0
