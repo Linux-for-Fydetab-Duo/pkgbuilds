@@ -6,7 +6,7 @@ _kernel=linux-fydetab
 pkgbase=$_kernel
 pkgname=("${pkgbase}-headers" $pkgbase)
 pkgver=6.1.75
-pkgrel=1
+pkgrel=2
 arch=('aarch64')
 license=('GPL2')
 url="https://github.com/Linux-for-Fydetab-Duo/linux-rockchip"
@@ -46,7 +46,7 @@ _package() {
   pkgdesc="The Linux Kernel and modules"
   depends=('coreutils' 'kmod' 'mkinitcpio>=0.7')
   optdepends=('wireless-regdb: to set the correct wireless channels of your country')
-  provides=("linux-fydetab=${pkgver}" "linux")
+  provides=("linux-fydetab=${pkgver}" "linux" "panthor")
   backup=("etc/mkinitcpio.d/${_kernel}.preset")
 
   cd linux-rockchip
