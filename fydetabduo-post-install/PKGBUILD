@@ -2,7 +2,7 @@
 
 pkgname=fydetabduo-post-install
 pkgver=20$(date +%y%m%d)
-pkgrel=2
+pkgrel=1
 pkgdesc="Fixes for FydeTab Duo"
 arch=('any')
 url="https://fydetabduo.com/"
@@ -13,7 +13,7 @@ backup=('etc/sddm.conf.d/fydetab.conf')
 source=('fydetabduo.service'
         'fix-display'
         'settings.conf'
-        'Xsetup'
+        'fix-display.service'
         '50-suspend-state.conf'
         '50-enable-screen-rotate.conf'
         'brcm_patchram_plus'
@@ -23,9 +23,9 @@ source=('fydetabduo.service'
         '90-fydetab.hwdb'
         'https://github.com/openFyde/overlay-fydetab_duo-openfyde/raw/r120-dev/chromeos-base/chromeos-bsp-fydetab_duo-openfyde/files/firmware/Himax_firmware.bin')
 sha256sums=('179eff376e90883c64a0a57ef3ef5122c4cf08df377c35eafbcefcc91f4851b5'
-            '319bb3833e931e67c71f5a457b8d3efc613bc91f055b0ea106cf288fd49e718c'
-            'f6ebdb03b1028a926754423eb39fcddc85fef467973f79f6ab4d5ae8edefcc85'
-            '57da3bf1439d21303ab3b4c4b3b2d1fe8c2b639b9588e7bffa29dd0f179bcfd3'
+            '18f5dbc2275ebfbfac69332948c9775cacaea44d35fc1788eae457ce3cebcb19'
+            'fe060a0f6de5b75326de1eec9f9ea322aa4a954c6e6b66cea0d224d6928f93eb'
+            '5eff8eb75f3c32d27dc623ec68271b56905f5483b11bd39dc878c75e83369ceb'
             'f12f21362329a42487f0627c2f2491b12cbba9695322ebb42e20661cf3eefa7a'
             '83f7c45531645efa6c9d9cade152e80620c1864608ad3349917b3998978fb238'
             '7d9d718a665ca2c64361bbde124c8c9dab0b5a97227da67908acfb40ab6a2994'
@@ -45,6 +45,7 @@ package() {
     install -Dm755 "${srcdir}/brcm_patchram_plus" "${pkgdir}/usr/bin/brcm_patchram_plus"
     install -Dm755 "${srcdir}/bluetooth-fix" "${pkgdir}/usr/bin/bluetooth-fix"
     install -Dm644 "${srcdir}/bluetooth-fydetab.service" "${pkgdir}/usr/lib/systemd/system/bluetooth-fydetab.service"
+    install -Dm644 "${srcdir}/fix-display.service" "${pkgdir}/usr/lib/systemd/system/fix-display.service"
 
     mkdir -p "${pkgdir}/usr/lib/firmware/ap6275p"
     install -Dm644 "${srcdir}/Himax_firmware.bin" "${pkgdir}/usr/lib/firmware/Himax_firmware.bin"
@@ -57,6 +58,5 @@ package() {
 
     install -Dm644 "${srcdir}/settings.conf" "${pkgdir}/etc/sddm.conf.d/fydetab.conf"
     install -Dm755 "${srcdir}/fix-display" "${pkgdir}/usr/bin/fix-display"
-    install -Dm755 "${srcdir}/Xsetup" "${pkgdir}/usr/share/sddm/scripts/Xsetup-new"
 }
 

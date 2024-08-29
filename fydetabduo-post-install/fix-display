@@ -1,11 +1,12 @@
 #! /bin/bash
-# Fix display orientation and touchscreen input
-set +e
 
-# Rotate display
-xrandr --output DSI-1 --auto --rotate right
+dir="/sys/class/graphics/fb0/"
 
-# Rotate touchscreen input
-xinput set-prop 'pointer:himax-touchscreen' 'Coordinate Transformation Matrix' 0 1 0 -1 0 1 0 0 1 
+# Loop until the directory exists
+while [ ! -d "$dir" ]; do
+    echo "Retrying in 1 second..."
+    sleep 1
+done
 
-exit 0
+echo 1 > /sys/class/graphics/fb0/blank
+echo 0 > /sys/class/graphics/fb0/blank
