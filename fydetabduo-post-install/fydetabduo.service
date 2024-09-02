@@ -1,7 +1,7 @@
 [Unit]
 Description=FydeTab Duo extra modules
 After=display-manager.service
-
+Before=bluetooth.service
 
 [Service]
 Type=oneshot

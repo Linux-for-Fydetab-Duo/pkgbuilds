@@ -22,7 +22,7 @@ source=('fydetabduo.service'
         'fydetab.rules'
         '90-fydetab.hwdb'
         'https://github.com/openFyde/overlay-fydetab_duo-openfyde/raw/r120-dev/chromeos-base/chromeos-bsp-fydetab_duo-openfyde/files/firmware/Himax_firmware.bin')
-sha256sums=('179eff376e90883c64a0a57ef3ef5122c4cf08df377c35eafbcefcc91f4851b5'
+sha256sums=('93b455dd9ae054f998137367edacf8d3b74eb98a9c998ea0fadceb340a51e3d1'
             '18f5dbc2275ebfbfac69332948c9775cacaea44d35fc1788eae457ce3cebcb19'
             'fe060a0f6de5b75326de1eec9f9ea322aa4a954c6e6b66cea0d224d6928f93eb'
             '5eff8eb75f3c32d27dc623ec68271b56905f5483b11bd39dc878c75e83369ceb'
