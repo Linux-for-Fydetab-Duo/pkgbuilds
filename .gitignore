@@ -5,3 +5,5 @@ grub/gnulib/
 grub-btrfs-*.tar.gz
 ap6275p-firmware/firmware
 linux-fydetab/linux-rockchip
+ckbcomp/console-setup_*.tar.*
+gnome-shell-extension-gjs-osk/gjsosk@vishram1123_main.zip

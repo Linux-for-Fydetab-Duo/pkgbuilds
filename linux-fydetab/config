@@ -3192,11 +3192,11 @@ CONFIG_USB_NET_RNDIS_WLAN=y
 #
 # Wireless WAN
 #
-# CONFIG_WWAN is not set
+CONFIG_WWAN=y
 # end of Wireless WAN
 
 # CONFIG_VMXNET3 is not set
-# CONFIG_LTE is not set
+CONFIG_LTE=y
 # CONFIG_NETDEVSIM is not set
 CONFIG_NET_FAILOVER=m
 # CONFIG_ISDN is not set
