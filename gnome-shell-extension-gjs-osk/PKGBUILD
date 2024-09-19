@@ -13,6 +13,9 @@ sha256sums=('d28e01ab63e15244164cbb8d86c0fe940b82ccdd69eeb2c155491dd40cb6797a')
 
 package() {
     cd "$srcdir"
-    mkdir -p "$pkgdir/usr/share/gnome-shell/extensions/gjs-osk@vishram1123"
-    unzip gjsosk@vishram1123_main.zip -d "$pkgdir/usr/share/gnome-shell/extensions/gjs-osk@vishram1123"
+    mkdir -p "$pkgdir/usr/share/gnome-shell/extensions/gjsosk@vishram1123.com"
+    unzip gjsosk@vishram1123_main.zip -d "$pkgdir/usr/share/gnome-shell/extensions/gjsosk@vishram1123.com"
+    mkdir -p "$pkgdir/usr/share/gnome-shell/extensions/gjsosk@vishram1123.com/keycodes"
+    tar -xf "$pkgdir/usr/share/gnome-shell/extensions/gjsosk@vishram1123.com/keycodes.tar.xz" -C "$pkgdir/usr/share/gnome-shell/extensions/gjsosk@vishram1123.com/keycodes"
+    rm "$pkgdir/usr/share/gnome-shell/extensions/gjsosk@vishram1123.com/keycodes.tar.xz"
 }
