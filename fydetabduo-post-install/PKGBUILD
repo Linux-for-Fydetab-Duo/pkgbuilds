@@ -21,6 +21,7 @@ source=('fydetabduo.service'
         'bluetooth-fydetab.service'
         'fydetab.rules'
         '90-fydetab.hwdb'
+        '99-fydetab.conf'
         'https://github.com/openFyde/overlay-fydetab_duo-openfyde/raw/r120-dev/chromeos-base/chromeos-bsp-fydetab_duo-openfyde/files/firmware/Himax_firmware.bin')
 sha256sums=('eb9e0e949c022779c21cfd46c465b7bcb9ad955b7d4136393b09bfb311015f3c'
             '18f5dbc2275ebfbfac69332948c9775cacaea44d35fc1788eae457ce3cebcb19'
@@ -33,12 +34,14 @@ sha256sums=('eb9e0e949c022779c21cfd46c465b7bcb9ad955b7d4136393b09bfb311015f3c'
             'a080f2007fc44c2dcb548e5741d435e76f18d97e065e1f88c21738387733d2bb'
             '5f71f99f7b8152c44634d060a35fd4cfe04cae3842620ac8e0287faae020def4'
             '36b5a7bcffc598d22136f920478e47592fbf6e8396ddb4eef4636652b4007e6b'
+            '451602435c1ba5efbfa89711e2b177f663222a483c4ee43294d85f3cdc574e25'
             'cf4a7fcd770d4c176128257a1a63360bc0b4da5bb85a46f61cff88aff9d02537')
 
 package() {
     mkdir -p "${pkgdir}/etc/NetworkManager/conf.d"
     echo -e "[device]\nwifi.backend=iwd" > "${pkgdir}/etc/NetworkManager/conf.d/wifi_backend.conf"
 
+    install -Dm644 "${srcdir}/99-fydetab.conf" "${pkgdir}/usr/lib/environment.d/99-fydetab.conf"
     install -Dm644 "${srcdir}/50-enable-screen-rotate.conf" "${pkgdir}/etc/systemd/system/iio-sensor-proxy.service.d/50-enable-screen-rotate.conf"
     install -Dm644 "${srcdir}/fydetabduo.service" "${pkgdir}/usr/lib/systemd/system/fydetabduo.service"
     install -Dm644 "${srcdir}/50-suspend-state.conf" "${pkgdir}/usr/lib/systemd/system/sleep.conf.d"
