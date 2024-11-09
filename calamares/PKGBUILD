@@ -3,7 +3,7 @@
 pkgname=('calamares')
 
 pkgver=3.3.8
-pkgrel=1
+pkgrel=3
 pkgdesc='Distribution-independent installer framework'
 arch=($CARCH)
 url="https://github.com/calamares/calamares"
@@ -25,7 +25,18 @@ depends=('ckbcomp'
 	'libpwquality'
 	'mkinitcpio-openswap'
 	'squashfs-tools'
-	'yaml-cpp')
+	'yaml-cpp'
+	'kconfig>=5.246'
+	'kcoreaddons>=5.246'
+	'ki18n>=5.246'
+	'kiconthemes>=5.246'
+	'kio>=5.246'
+	'polkit-qt6>=0.175.0'
+	'qt6-base>=6.6.0'
+	'qt6-svg>=6.6.0'
+	'solid>=5.246'
+	'qt6-tools'
+	'qt6-translations')
 
 makedepends=('extra-cmake-modules' 'git' 'qt6-tools' 'qt6-translations' 'qt6-svg' 'qt6-base' 'polkit-qt6' 'kconfig' 'kcoreaddons' 'ki18n' 'kiconthemes' 'kio' 'solid')
 
@@ -48,64 +59,6 @@ sha256sums=('523a0e4cfefbe471d9a6a5d874018fe282a4ce3667ff560bd97190339be6b592'
             'f00c90bd87d6dfd73b3ec53fa9a145ac25234676be41604807f05f05a4bf5bbb'
             '0830c8fe57c94a63ef87b6a025eb729b4f098a9e46e729b63415f4d3a2755762')
 
-prepare() {
-	makedepends() {
-	if [[ $pkgname == 'calamares' ]]; then
-		makedepends+=('qt6-tools' 'qt6-translations')
-	elif [[ $pkgname == 'calamares-qt5' ]]; then
-		makedepends+=('qt5-tools' 'qt5-translations')
-	fi
-	handle_qt_version
-	}
-
-	handle_qt_version() {
-	if [[ $pkgname == 'calamares' ]]; then
-		qt=6
-	elif [[ $pkgname == 'calamares-qt5' ]]; then
-		qt=5
-	fi
-	cd "${srcdir}/${pkgname}-${pkgver}" || return
-		sed -i 's/"Install configuration files" OFF/"Install configuration files" ON/' "${srcdir}/${pkgname}-${pkgver}/CMakeLists.txt"
-		sed -i "s|\${CALAMARES_VERSION_MAJOR}.\${CALAMARES_VERSION_MINOR}.\${CALAMARES_VERSION_PATCH}|${pkgver}-${pkgrel}|g" CMakeLists.txt
-		sed -i "s|CALAMARES_VERSION_RC 1|CALAMARES_VERSION_RC 0|g" CMakeLists.txt
-		git apply --verbose ../paru-support.patch
-	}
-
-##	Non-standard ##
-	# handle_qt6_base() {
-	# if ls ./qt6-base/qt6-base-*.pkg.tar.zst 1> /dev/null 2>&1; then
-	# 	echo "qt6-base already exists"
-	# 	update_qt6_base
-	# else
-	# 	clone_and_build_qt6_base
-	# fi
-	# }
-
-	# update_qt6_base() {
-	# 	cd qt6-base || exit
-	# 	echo -e "\e[1;32mUpdate qt6-base? (y/n) : \e[0m\c"
-	# 	read -r input
-	# if [ "$input" = "y" ]; then
-	# 	git pull
-	# 	git apply --verbose ../flag.patch
-	# 	makepkg -sif
-	# else
-	# 	makepkg -si
-	# fi
-	# }
-
-	# clone_and_build_qt6_base() {
-	# 	git clone https://gitlab.archlinux.org/archlinux/packaging/packages/qt6-base.git
-	# 	cd qt6-base || exit
-	# 	git apply --verbose ../flag.patch
-	# 	makepkg -si
-	# }
-##	Non-standard ##
-
-	# Call the function to start the process
-	makedepends
-
-}
 
 build() {
 	cd "${srcdir}/${pkgname}-${pkgver}" || return
@@ -115,7 +68,7 @@ build() {
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=lib \
-		-DWITH_QT"${qt}"=ON \
+		-DWITH_QT6=ON \
 		-DWITH_PYTHONQT=OFF \
 		-DWITH_KF5DBus=OFF \
 		-DBoost_NO_BOOST_CMAKE=ON \
@@ -147,14 +100,17 @@ package() {
 		'polkit-qt6>=0.175.0'
 		'qt6-base>=6.6.0'
 		'qt6-svg>=6.6.0'
-		'solid>=5.246')
+		'solid>=5.246'
+		yaml-cpp
+		kpmcore)
+
 
 	cd "${srcdir}/${pkgname}-${pkgver}/build" || return
 	make DESTDIR="$pkgdir" install
-	install -Dm644 "${srcdir}/calamares.desktop" "$pkgdir/etc/xdg/autostart/calamares.desktop"
-	install -Dm755 "${srcdir}/calamares_polkit" "$pkgdir/usr/bin/calamares_polkit"
-	install -Dm644 "${srcdir}/49-nopasswd-calamares.rules" "$pkgdir/etc/polkit-1/rules.d/49-nopasswd-calamares.rules"
-	chmod 750 "$pkgdir"/etc/polkit-1/rules.d
+	# install -Dm644 "${srcdir}/calamares.desktop" "$pkgdir/etc/xdg/autostart/calamares.desktop"
+	# install -Dm755 "${srcdir}/calamares_polkit" "$pkgdir/usr/bin/calamares_polkit"
+	# install -Dm644 "${srcdir}/49-nopasswd-calamares.rules" "$pkgdir/etc/polkit-1/rules.d/49-nopasswd-calamares.rules"
+	# chmod 750 "$pkgdir"/etc/polkit-1/rules.d
 
 }
 
