@@ -3,7 +3,7 @@
 pkgname=('calamares')
 
 pkgver=3.3.8
-pkgrel=3
+pkgrel=4
 pkgdesc='Distribution-independent installer framework'
 arch=($CARCH)
 url="https://github.com/calamares/calamares"
