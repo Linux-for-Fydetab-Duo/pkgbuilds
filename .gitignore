@@ -8,3 +8,5 @@ linux-fydetab/linux-rockchip
 ckbcomp/console-setup_*.tar.*
 gnome-shell-extension-gjs-osk/gjsosk@vishram1123_main.zip
 calamares-settings/calamares-settings/
+*.tar.xz
+*.tar.gz
